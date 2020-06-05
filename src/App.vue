@@ -15,7 +15,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/">
+        <v-list-item to="/todo">
           <v-list-item-action>
             <v-icon>mdi-clipboard-list</v-icon>
           </v-list-item-action>
