@@ -1,43 +1,39 @@
 <template>
     <div>
-          <v-text-field
-            v-model="todoItem"
-            :append-icon="'mdi-map-marker'"
+        <v-text-field
+            v-model="task"
             filled
+            append-icon="mdi-plus-circle"
             clear-icon="mdi-close-circle"
             clearable
-            label="할 일을 입력하세요"
+            label="할 일을 입력하세요 !!!"
             type="text"
-            @click:clear="clearMessage"
-          ></v-text-field>
+            @click:append="createTask"
+            @click:clear="clearTask"
+            @keypress.enter="createTask" > 
+        </v-text-field>
     </div>  
 </template>
 
 <script>
 export default {
     data: () => ({
-      todoItem: '',
-      rules: [
-        value => !!value || 'Required.',
-        value => (value && value.length >= 3) || 'Min 3 characters',
-      ],
+      task: ''
     }),
 
     methods: {
 
-        addTodo() {
-            if( this.todoItem !== "") {
-                var value = this.todoItem && this.todoItem.trim();
-                // this.$store.commit( 'ADD_TODO', value );
+        createTask() {
+            if( this.task !== "") {
+                var value = this.task && this.task.trim();
                 this.$store.dispatch( 'addTodo', value );
-                this.clearInput();
-            } else {
-                this.$bvModal.show('warning-modal');
+                this.clearTask();
             }
         },
-        clearMessage() {
-            this.todoItem = '';
-        }
+
+        clearTask() {
+            this.task = '';
+        }   
     }
 }
 </script>

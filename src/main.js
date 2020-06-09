@@ -14,3 +14,6 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+import VueMoment from 'vue-moment'
+Vue.use(VueMoment);

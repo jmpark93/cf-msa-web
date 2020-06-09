@@ -1,5 +1,20 @@
 <template>
-    <div class="mb-2 d-flex">
+    <div>
+            <v-list-item-action>
+              <v-checkbox
+                v-model="todo.isDone"
+                :color="todo.isDone && 'grey' || 'primary'"
+                @change="updateTodo"
+              >
+              </v-checkbox>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title> {{ todo.todoItem}}</v-list-item-title>
+              <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
+            </v-list-item-content>
+
+    <!-- <div class="mb-2 d-flex">
         <div class="vertCenteredContent"> 
             <b-form-checkbox v-model="todo.isDone" @change="updateTodo"> </b-form-checkbox>
         </div>
@@ -12,6 +27,8 @@
         <span class="removeBtn" type="button" @click="removeTodo">
             <b-icon icon=trash> </b-icon>
         </span>    
+    </div> -->
+
     </div>
 </template>
 
@@ -24,18 +41,17 @@ export default {
         }
     },
     methods: {
-        updateTodo(checked) {
-            // this.$store.commit('UPDATE_TODO', {
-            this.$store.dispatch('updateTodo', {
-                id: this.todo.id,
-                todoItem: this.todo.todoItem,
-                isDone: checked
-            })
-        },
-        removeTodo(e) {
-            // this.$store.commit('REMOVE_TODO', this.todo.id);
-            this.$store.dispatch('removeTodo', this.todo.id);
-        }
+        // updateTodo(checked) {
+        //     this.$store.dispatch('updateTodo', {
+        //         id: this.todo.id,
+        //         todoItem: this.todo.todoItem,
+        //         isDone: checked
+        //     })
+        // },
+        // removeTodo(e) {
+        //     // this.$store.commit('REMOVE_TODO', this.todo.id);
+        //     this.$store.dispatch('removeTodo', this.todo.id);
+        // }
     }    
 }
 </script>

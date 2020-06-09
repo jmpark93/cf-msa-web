@@ -8,6 +8,6 @@
 h1 {
     color: #2F3B52;
     font-weight: 900;
-    margin: 1.5rem 0 1.5rem;
+    margin: 0.1rem 0 0.5rem;
 }
 </style>

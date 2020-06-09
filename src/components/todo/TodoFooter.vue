@@ -1,14 +1,15 @@
 <template>
     <div>
-        <b-button variant="outline-danger" @click="clearTodo"> Clear All </b-button>
+        <v-btn class="ma-2" tile outlined color="warning" @click="clearTask">
+        <v-icon left>mdi-delete-forever</v-icon> Clear All
+        </v-btn>
     </div>
 </template>
 
 <script>
 export default {
     methods: {
-        clearTodo() {
-            // this.$store.commit( 'CLEAR_ALL');
+        clearTask() {
             this.$store.dispatch( 'clearAll');
         }
     }

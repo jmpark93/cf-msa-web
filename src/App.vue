@@ -57,6 +57,7 @@
           <v-col class="text-center">
             <router-view></router-view>
           </v-col>
+          
         </v-row>
       </v-container>
     </v-content>
