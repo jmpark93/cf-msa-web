@@ -42,13 +42,15 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>JMWork's sss App</v-toolbar-title>
+      <v-toolbar-title>JMWork's App</v-toolbar-title>
+
+      <v-spacer> </v-spacer>
 
       <v-btn icon to="/login">
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
       <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
+        <v-icon>mdi-login</v-icon>
       </v-btn>
     </v-app-bar>
 

@@ -23,6 +23,11 @@ const routes = [
     path: '/todo',
     name: 'Todo',
     component: Todo
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
