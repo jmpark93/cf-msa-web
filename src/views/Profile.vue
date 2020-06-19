@@ -21,7 +21,12 @@
     <ul>
       <li v-for="(role,index) in currentUser.roles" :key="index">{{role}}</li>
     </ul>
+
+    <div>
+          <strong>{{content}}</strong> 
+    </div>  
   </div>
+
 </template>
 
 <script>
@@ -33,6 +38,7 @@ export default {
 
   data: () => ({
     userDetail: new UserDetail(''),
+    content: ''
   }),  
 
   computed: {
@@ -45,15 +51,19 @@ export default {
       this.$router.push('/login');
     }
 
+    console.log( "User ID : " + this.currentUser.id);
+
     UserService.getProfile(this.currentUser.id).then(
       response => {
         this.content = response.data;
       },
       error => {
         this.content =
-          (error.response && error.response.data) ||
+          (error.response && error.response.data) &&
           error.message ||
           error.toString();
+
+        console.log( this.content);
       }
     );
   }
