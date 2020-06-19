@@ -15,12 +15,39 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="/todo">
+        <v-list-item v-if="currentUser" to="/todo">
           <v-list-item-action>
             <v-icon>mdi-clipboard-list</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Todo</v-list-item-title>
+            <v-list-item-title>Todo 앱</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-if="currentUser" to="/book">
+          <v-list-item-action>
+            <v-icon>mdi-book-open-variant</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Book 앱</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-if="showAdminBoard" to="/admin">
+          <v-list-item-action>
+            <v-icon>mdi-hammer-screwdriver</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Admin Contents</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-if="currentUser" to="/profile">
+          <v-list-item-action>
+            <v-icon> mdi-badge-account-horizontal </v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title> Profile </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -29,7 +56,7 @@
             <v-icon>mdi-email</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
+            <v-list-item-title>About</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -46,12 +73,28 @@
 
       <v-spacer> </v-spacer>
 
-      <v-btn icon to="/login">
-        <v-icon>mdi-account-circle</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-login</v-icon>
-      </v-btn>
+      <div v-if="!loggedIn"> 
+        등록
+        <v-btn icon to="/register"  >
+          <v-icon> mdi-badge-account-horizontal-outline </v-icon>
+        </v-btn>
+        로그인
+        <v-btn icon to="/login">
+          <v-icon>mdi-login</v-icon>
+        </v-btn>
+      </div>
+
+      <div v-else> 
+        {{ currentUser.username }}
+        <v-btn icon to="/profile">
+          <v-icon> mdi-badge-account-horizontal </v-icon>
+        </v-btn>
+        로그아웃
+        <v-btn icon @click.prevent="logOut" >
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+      </div>
+
     </v-app-bar>
 
     <v-content>
@@ -83,12 +126,37 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      source: String,
+export default {
+  // props: {
+  //   source: String,
+  // },
+  data: () => ({
+    drawer: null,
+  }),
+
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
     },
-    data: () => ({
-      drawer: null,
-    }),
-  }
+
+    showAdminBoard() {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes('ROLE_ADMIN');
+      }
+
+      return false;
+    }, 
+
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    } 
+  },  
+
+methods: {
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
+  }  
+}
 </script>

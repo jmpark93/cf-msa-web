@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-card width="400" class="mx-auto mt-5">
       <v-card-title  class="justify-center" >
         <v-avatar color="indigo">
@@ -26,21 +26,23 @@
       </v-card-text>
       <v-divider> </v-divider>
       <v-card-actions>
-        <v-btn color="success"> Register </v-btn>
+        <v-btn color="success" to=/register> Register </v-btn>
         <v-spacer> </v-spacer>
         <v-btn color="info" :disabled="loading" type="submit" form="login-form"> Login </v-btn>
       </v-card-actions>
-      <v-card-text >
-        <v-alert v-if="message" dense text type="error" class="text-left"> {{message}} </v-alert>
+      <v-card-text  v-if="message">
+        <v-alert dense text type="error" class="text-left"> {{message}} </v-alert>
       </v-card-text>
     </v-card>
-  </v-app>
+  </div>
 </template>
 
 <script>
 import User from '../models/user';
 
 export default {
+  name: "Login",
+  
   data: () => ({
     user: new User('', '', ''),
     loading: false,
@@ -56,7 +58,7 @@ export default {
 
   created() {
     if( this.loggedin ) {
-      this.$router.push('/todo');
+      this.$router.push('/profile');
     }
   },
 
@@ -65,14 +67,17 @@ export default {
       this.loading = true;
 
       if (this.user.username && this.user.password) {
+
         this.$store.dispatch('auth/login', this.user).then(
           () => {
               this.$router.push('/todo');
           },
           error => {
             this.loading = false;
-            this.message =
-              (error.response && error.response.data) ||
+
+            this.message = 
+              (error.response && error.response.data) &&
+              error.response.data.error_description ||
               error.message ||
               error.toString();
           }

@@ -61,6 +61,8 @@ import TodoFooter from "@/components/todo/TodoFooter.vue"
 import { mapState, mapActions } from "vuex";
 
 export default {
+  name: 'Todo',
+
     data: () => ({
       model: 1
     }),
