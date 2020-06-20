@@ -58,47 +58,57 @@ import TodoInput from "@/components/todo/TodoInput.vue"
 import TodoItem from "@/components/todo/TodoItem.vue"
 import TodoFooter from "@/components/todo/TodoFooter.vue"
 
-import { mapState, mapActions } from "vuex";
+import TodoService from '../services/todo.service';
+
+import { mapState } from "vuex";
 
 export default {
   name: 'Todo',
 
-    data: () => ({
-      model: 1
-    }),
+  data: () => ({
+    model: 1
+  }),
 
-    created() {
-        this.getAll();
+  computed: {
+    todos() {
+      return this.$store.state.todo.todos;
     },
 
-    computed: {
-        ...mapState([
-            'todos'
-        ])
-    },
-    methods: {
-        ...mapActions([
-            'getAll'
-        ]), 
-
-        updateTask(task) {
-            console.log( "task.isDone : " + task.isDone)
-            this.$store.dispatch('updateTodo', {
-                id: task.id,
-                todoItem: task.todoItem,
-                isDone: task.isDone
-            })
-        },
-
-        removeTask(task) {
-            this.$store.dispatch('removeTodo', task.id);
-        }
-    },
-    components: {
-        'TodoHeader' : TodoHeader,
-        'TodoInput' : TodoInput,
-        'TodoItem' : TodoItem,
-        'TodoFooter' : TodoFooter
+    currentUser() {
+      return this.$store.state.auth.user;
     }
+  },
+
+  mounted() {
+    if (!this.currentUser) {
+      this.$router.push('/login');
+    } else {
+      this.$store.dispatch('todo/getAllByUserId', this.currentUser.id);
+    }
+  }, 
+
+
+
+  methods: {
+    updateTask(task) {
+      console.log( "task.isDone : " + task.isDone);
+      this.$store.dispatch('updateTodo', {
+        id: task.id,
+        todoItem: task.todoItem,
+        isDone: task.isDone
+      })
+    },
+
+    removeTask(task) {
+      this.$store.dispatch('removeTodo', task.id);
+    }
+  },
+
+  components: {
+    'TodoHeader' : TodoHeader,
+    'TodoInput' : TodoInput,
+    'TodoItem' : TodoItem,
+    'TodoFooter' : TodoFooter
+  }
 }
 </script>

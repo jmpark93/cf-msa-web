@@ -40,56 +40,18 @@ export const todo = {
   },
 
   actions: {
-
-    getAll( { commit } ) {
-      // curl -X GET "http://legtodo.kpaasta.io/api/todos" -H "accept: application/json"
-
-      axios.get('/todoapi/todos').then( response => {
-        commit( 'GET_ALL', response.data._embedded.todos );
-      });
-
+    getAllByUserId( { commit }, uesrID ) {
+      return TodoService.getAllByUserId(uesrID).then(
+        response => {
+          commit('GET_ALL');
+          return Promise.resolve(response.data._embedded.todos);
+        },
+        error => {
+          console.log( "getAllByUserId(" + uesrID + ") : " + error );
+        }
+      );
     },
-
-    addTodo( { commit }, value ) {
-      // curl -X POST "http://legtodo.kpaasta.io/api/todos" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"done\": true, \"todoItem\": \"ASDFASDf\"}"
-
-      let todoItem = {
-        todoItem: value,
-        isDone: false
-      };
-
-      axios.post('/todoapi/todos', todoItem).then( response => {
-        commit( 'ADD_TODO', response.data);
-      });
-
-    },
-
-    removeTodo( { commit }, todoId ) {
-      // curl -X DELETE "http://legtodo.kpaasta.io/api/todos/0" -H "accept: */*"
-
-      axios.delete('/todoapi/todos/' + todoId).then( response => {
-        commit( 'REMOVE_TODO', todoId );
-      });
-
-    },
-
-    updateTodo( { commit }, value ) {
-      // curl -X PATCH "http://legtodo.kpaasta.io/api/todos/1" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"done\": false, \"id\": 1, \"todoItem\": \"string}"
-
-      axios.patch('/todoapi/todos/' + value.id, value ).then( response => {
-        commit( 'UPDATE_TODO', response.data );
-      });
-
-    },
-
-    clearAll( { commit } ) {
-      // curl -X DELETE "http://legtodo.kpaasta.io/api/todos/all" -H "accept: */*"
-
-      axios.delete('/todoapi/todos/all').then( response => {
-        commit( 'CLEAR_ALL' );
-      });
-
-    }
+    
   },
 
   getters: {
