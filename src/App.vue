@@ -173,7 +173,10 @@ export default {
 methods: {
     logOut() {
       this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
+
+      if( this.$router.path !== '/login') {
+        this.$router.push('/login').catch(() => {});;
+      }
     }
   }  
 }

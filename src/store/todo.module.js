@@ -95,6 +95,10 @@ export const todo = {
           return Promise.resolve(response);
         },
         error => {
+          if( error.response.status === 404 ) {
+            commit('CLEAR_ALL');
+          }
+
           console.log( "User[" + userId + "] removeAllByUserId() : " + error );
         }
       );

@@ -23,7 +23,7 @@ class TodoService {
   updateTodo(todoObj) {
     return axios.patch(API_URL + todoObj.id, todoObj, { headers: authHeader() });
   }
-
+ 
   // 일단 API 부터 다시 확인 ...
   removeAllByUserId(userId) {
     return axios.get(API_URL + 'search/deleteAllByUserID?userID=' + userId, { headers: authHeader() });
