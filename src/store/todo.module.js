@@ -40,26 +40,70 @@ export const todo = {
   },
 
   actions: {
-    getAllByUserId( { commit }, uesrID ) {
-      return TodoService.getAllByUserId(uesrID).then(
+    getAllByUserId( { commit }, userId ) {
+      return TodoService.getAllByUserId(userId).then(
         response => {
-          commit('GET_ALL');
+          commit('GET_ALL', response.data._embedded.todos);
           return Promise.resolve(response.data._embedded.todos);
         },
         error => {
-          console.log( "getAllByUserId(" + uesrID + ") : " + error );
+          console.log( "User[" + userId + "] getAllByUserId() : " + error );
         }
       );
     },
     
+    addTodo( { commit }, itemObj ) {
+      return TodoService.addTodo( itemObj.userId, itemObj.todoItem ).then(
+        response => {
+          commit('ADD_TODO', response.data);
+          return Promise.resolve(response.data);
+        },
+        error => {
+          console.log( "User[" + itemObj.userId + "] addTodo() : " + error );
+        }
+      );
+    }, 
+
+    removeTodo( { commit }, todoId ) {
+      return TodoService.removeTodo( todoId ).then(
+        response => {
+          commit('REMOVE_TODO', todoId);
+          return Promise.resolve(response);
+        },
+        error => {
+          console.log( "User[" + itemObj.userId + "] removeTodo() : " + error );
+        }
+      );
+    }, 
+
+    updateTodo( { commit }, itemObj ) {
+      return TodoService.updateTodo( itemObj ).then(
+        response => {
+          commit('UPDATE_TODO', response.data);
+          return Promise.resolve(response.data);
+        },
+        error => {
+          console.log( "User[" + itemObj.userId + "] updateTodo() : " + error );
+        }
+      );
+    },
+
+    removeAllByUserId( { commit }, userId ) {
+      return TodoService.removeAllByUserId(userId).then(
+        response => {
+          commit('CLEAR_ALL');
+          return Promise.resolve(response);
+        },
+        error => {
+          console.log( "User[" + userId + "] removeAllByUserId() : " + error );
+        }
+      );
+    }
   },
 
   getters: {
     numberOfComplete: state => {
       return state.todos.filter( todo => todo.checked ).length;
     }
-  },
-
-  modules: {
   }
 }

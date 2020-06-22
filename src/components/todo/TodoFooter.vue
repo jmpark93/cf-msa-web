@@ -8,9 +8,15 @@
 
 <script>
 export default {
+    computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+
     methods: {
         clearTask() {
-            this.$store.dispatch( 'clearAll');
+            this.$store.dispatch( 'todo/removeAllByUserId', this.currentUser.id );
         }
     }
 }

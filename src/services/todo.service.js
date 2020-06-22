@@ -4,14 +4,14 @@ import authHeader from './auth-header';
 const API_URL = 'http://localhost:8082/api/todos/';
 
 class TodoService {
-  getAllByUserId(uesrID) {
-    return axios.get(API_URL + 'search/findByUserID?userID=' + uesrID, { headers: authHeader() });
+  getAllByUserId(uesrId) {
+    return axios.get(API_URL + 'search/findByUserID?userID=' + uesrId, { headers: authHeader() });
   }
 
-  addTodo(uesrID, todoItem) {
+  addTodo(uesrId, todoTitle) {
     return axios.post(API_URL, {
-      userID: uesrID,
-      todoItem: todoItem,
+      userID: uesrId,
+      todoItem: todoTitle,
       isDone: false
     }, { headers: authHeader() });
   }
@@ -20,13 +20,13 @@ class TodoService {
     return axios.delete(API_URL + todoID, { headers: authHeader() });
   }
 
-  updateTodo(todo) {
-    return axios.patch(API_URL + todo.id, todo, { headers: authHeader() });
-
+  updateTodo(todoObj) {
+    return axios.patch(API_URL + todoObj.id, todoObj, { headers: authHeader() });
   }
 
-  clearAllByUserID(uesrID) {
-    return axios.delete(API_URL + todoID, { headers: authHeader() });
+  // 일단 API 부터 다시 확인 ...
+  removeAllByUserId(userId) {
+    return axios.get(API_URL + 'search/deleteAllByUserID?userID=' + userId, { headers: authHeader() });
   }
 }
 

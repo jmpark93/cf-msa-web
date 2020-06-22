@@ -58,10 +58,6 @@ import TodoInput from "@/components/todo/TodoInput.vue"
 import TodoItem from "@/components/todo/TodoItem.vue"
 import TodoFooter from "@/components/todo/TodoFooter.vue"
 
-import TodoService from '../services/todo.service';
-
-import { mapState } from "vuex";
-
 export default {
   name: 'Todo',
 
@@ -87,12 +83,10 @@ export default {
     }
   }, 
 
-
-
   methods: {
     updateTask(task) {
       console.log( "task.isDone : " + task.isDone);
-      this.$store.dispatch('updateTodo', {
+      this.$store.dispatch('todo/updateTodo', {
         id: task.id,
         todoItem: task.todoItem,
         isDone: task.isDone
@@ -100,7 +94,7 @@ export default {
     },
 
     removeTask(task) {
-      this.$store.dispatch('removeTodo', task.id);
+      this.$store.dispatch('todo/removeTodo', task.id);
     }
   },
 

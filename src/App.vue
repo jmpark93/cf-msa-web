@@ -15,6 +15,8 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-divider></v-divider>
+
         <v-list-item v-if="currentUser" to="/todo">
           <v-list-item-action>
             <v-icon>mdi-clipboard-list</v-icon>
@@ -51,6 +53,8 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-divider></v-divider>
+
         <v-list-item to="/about">
           <v-list-item-action>
             <v-icon>mdi-email</v-icon>
@@ -74,14 +78,23 @@
       <v-spacer> </v-spacer>
 
       <div v-if="!loggedIn"> 
-        등록
-        <v-btn icon to="/register"  >
-          <v-icon> mdi-badge-account-horizontal-outline </v-icon>
-        </v-btn>
-        로그인
-        <v-btn icon to="/login">
-          <v-icon>mdi-login</v-icon>
-        </v-btn>
+        <v-tooltip bottom> 
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon to="/register"  v-bind="attrs" v-on="on">
+              <v-icon> mdi-badge-account-horizontal-outline </v-icon>
+            </v-btn>
+          </template>
+          <span> 등록 </span>
+        </v-tooltip>
+
+        <v-tooltip bottom> 
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon to="/login"  v-bind="attrs" v-on="on">
+              <v-icon> mdi-login </v-icon>
+            </v-btn>
+          </template>
+          <span> 로그인 </span>
+        </v-tooltip>
       </div>
 
       <div v-else> 
@@ -89,10 +102,15 @@
         <v-btn icon to="/profile">
           <v-icon> mdi-badge-account-horizontal </v-icon>
         </v-btn>
-        로그아웃
-        <v-btn icon @click.prevent="logOut" >
-          <v-icon>mdi-logout</v-icon>
-        </v-btn>
+
+        <v-tooltip bottom> 
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon to="/login"  v-bind="attrs" v-on="on" @click.prevent="logOut">
+              <v-icon> mdi-logout </v-icon>
+            </v-btn>
+          </template>
+          <span> 로그아웃 </span>
+        </v-tooltip>
       </div>
 
     </v-app-bar>

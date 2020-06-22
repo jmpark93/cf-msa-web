@@ -20,13 +20,20 @@ export default {
     data: () => ({
       task: ''
     }),
+    
+    computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
 
     methods: {
-
         createTask() {
             if( this.task !== "") {
                 var value = this.task && this.task.trim();
-                this.$store.dispatch( 'addTodo', value );
+                this.$store.dispatch( 'todo/addTodo', { 
+                    userId: this.currentUser.id, 
+                    todoItem: value } );
                 this.clearTask();
             }
         },
