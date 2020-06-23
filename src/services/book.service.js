@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:8083/api/book/';
 
 class BookService {
   getInfo() {
-    return axios.get(API_URL + 'list', { headers: authHeader() });
+    return axios.get(API_URL + 'info', { headers: authHeader() });
   }
 }
 

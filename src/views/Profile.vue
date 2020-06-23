@@ -1,30 +1,59 @@
 <template>
   <div class="container">
-    <header class="jumbotron">
-      <h3>
-        <strong>{{currentUser.username}}</strong> Profile
-      </h3>
-    </header>
-    <p>
-      <strong>Token:</strong>
-      {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
-    </p>
-    <p>
-      <strong>Id:</strong>
-      {{currentUser.id}}
-    </p>
-    <p>
-      <strong>Email:</strong>
-      {{currentUser.email}}
-    </p>
-    <strong>Authorities:</strong>
-    <ul>
-      <li v-for="(role,index) in currentUser.roles" :key="index">{{role}}</li>
-    </ul>
 
-    <div>
-          <strong>{{content}}</strong> 
-    </div>  
+    <v-subheader> {{currentUser.username}}'s Profile </v-subheader>
+    <v-divider> </v-divider>
+
+    <v-simple-table dark>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Key</th>
+            <th class="text-left">Values</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left"> Token </td>
+            <td class="text-left"> {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}} </td>
+          </tr>
+          <tr>
+            <td class="text-left"> Id </td>
+            <td class="text-left"> {{currentUser.id}} </td>
+          </tr>
+          <tr>
+            <td class="text-left"> Email </td>
+            <td class="text-left"> {{currentUser.email}} </td>
+          </tr>
+          <tr>
+            <td class="text-left">Authorities</td>
+            <td class="text-left">
+              xxx</td>
+          </tr>                        
+        </tbody>
+      </template>
+    </v-simple-table>
+
+
+    <v-subheader> {{currentUser.username}}'s Details  </v-subheader>
+    <v-divider> </v-divider>
+
+    <v-simple-table dark>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Key</th>
+            <th class="text-left">Values</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left"> 미정 </td>
+            <td class="text-left"> {{ content }} </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
   </div>
 
 </template>

@@ -99,9 +99,14 @@
 
       <div v-else> 
         {{ currentUser.username }}
-        <v-btn icon to="/profile">
-          <v-icon> mdi-badge-account-horizontal </v-icon>
-        </v-btn>
+        <v-tooltip bottom> 
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon to="/profile" v-bind="attrs" v-on="on">
+              <v-icon> mdi-badge-account-horizontal </v-icon>
+            </v-btn>
+          </template>
+          <span> 프로파일 </span>
+        </v-tooltip>
 
         <v-tooltip bottom> 
           <template v-slot:activator="{ on, attrs }">

@@ -16,12 +16,13 @@
         </h1>
 
         <p class="subheading font-weight-regular">
-          Cloud Foundry 를 활용한 전통적인 웹 서비스(WEB >> WAS >> DB) 제작 설명을 위한 샘플 프로그램입니다. 
+          Cloud Foundry 를 활용한 MSA 구조의 웹 서비스 제작 설명을 위한 샘플 프로그램입니다. 
           <br>자세한 설명은 다음 링크를 참조하시기 바랍니다. 
+          <br> 
           <a
-            href="https://docs.kpaasta.io/dev/legacy"
+            href="https://docs.kpaasta.io/dev/msa"
             target="_blank"
-          >전통적인 웹 서비스 제작가이드</a>
+          > MSA 제작 가이드 (1) </a>
         </p>
       </v-col>
 
