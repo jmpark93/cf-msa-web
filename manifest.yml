@@ -10,6 +10,6 @@ applications:
     BACKEND_AUTHAPI: 'http://msa-auth.cf.intl'
     BACKEND_USERAPI: 'http://msa-auth.cf.intl'
     BACKEND_TODOAPI: 'http://msa-todo.cf.intl'
-    BACKEND_BOOKAPI: 'http://msa-book.cf.intl'
+    BACKEND_BOOKAPI: 'http://msa-contents.cf.intl'
   routes:
   - route: msa-web.kpaasta.io
